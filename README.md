@@ -136,34 +136,3 @@ print(f'Break Even Quantity-{round(sav1*(budget/p1)/sav2)}')
 
 ![png](BusinessCaseInterview-DataAnalyst_files/BusinessCaseInterview-DataAnalyst_2_1.png)
 
-
-
-```python
-!git init
-!git add README.md
-!git commit -m "first commit"
-!git remote add origin https://github.com/menach123/Interview_5-29-20.git
-!git push -u origin master
-```
-
-    Initialized empty Git repository in C:/Users/FlatIron_User/DataScience/Interview_5-29-20/.git/
-    
-
-    warning: LF will be replaced by CRLF in README.md.
-    The file will have its original line endings in your working directory
-    
-
-    [master (root-commit) d2b93f2] first commit
-     1 file changed, 184 insertions(+)
-     create mode 100644 README.md
-    Branch 'master' set up to track remote branch 'master' from 'origin'.
-    
-
-    To https://github.com/menach123/Interview_5-29-20.git
-     * [new branch]      master -> master
-    
-
-
-```python
-
-```
