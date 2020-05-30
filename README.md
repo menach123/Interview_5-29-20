@@ -1,18 +1,16 @@
-
-
 ### Business Case Interview - Data Analyst
 
-The business is centered of a bank and tracking customer transactions. Each transaction has a description  which indistinguishable like the below. 
+The business case is centered on a bank in particularly tracking customer transactions. Each transaction has a description which is indecipherable like the below. These unhelpful descriptions don't provide customers useful information and can lead to confusion. This confusion leads to calls to the bank's customer service line that lead to increase cost to the company.
 
 ```ESBFRN.COM ABBOTS LANGL GBR ```
 
-There are 2 vendors for a location lookup function that converted the description into a something useful. The vendor will provide: 
+There are 2 vendors for a lookup function that converted the description into two more helpful point with the vendor providing:
 <ul>
   <li>Accuracy business description</li>
   <li>Location Information (City, State,...)</li>
 </ul> 
 
-Each corrected description will lead to 20% decrease  in the cost of a customer service call associated with a transaction ($15.00). 
+Each corrected description will lead to a 20% decrease in the cost of a customer service call associated with a transaction ($15.00). 
 
 Vendor 1 provides:
 
@@ -32,107 +30,24 @@ Vendor 2 provides:
 
 What is the break even quantity of lookups between Vendor 1 and Vendor 2? 
 
-
-```python
-#Vendor 1 stats
-p1=0.1 # price per lookup ($)
-acc1 = 0.7 # accuracy 
-
-#Vendor 2 Stats
-p2 = 0.08# price per lookup($)
-acc2= 0.6 # accuracy 
-
-#Savings percent on call for correct lookup ($)
-sr= 0.2
-
-# Price of CS call ($)
-call_price= 15
-
-
-# Saving per call ($)
-sav1 = acc1* sr* call_price - p1 #Vendor 1 savings per lookup 
-sav2= acc2* sr* call_price - p2 #Vendor 2 savings per lookup
-
-
-
-
-budget = 100000
-end_quantity = int(budget/p2)
-quantity = [int(i) for i in range(0,end_quantity)]
-savings1 = [sav1*i if i*p1<budget else sav1*(budget/p1) for i in range(0,end_quantity)]
-savings2 = [sav2*i if i*p2<budget else sav2*(budget/p2) for i in range(0,end_quantity)]
-
-
-
-
-
-import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set_style("whitegrid")
-
-
-
-
-
-plt.figure(figsize=(13,8))
-# plotting Vendor 
-plt.plot( quantity, savings1, label= f'Vendor 1- Saving Per ${round(sav1, 2)}') 
-plt.plot(quantity, savings2, label= f'Vendor 2- Saving Per ${round(sav2, 2)}')
-
-#plotting Break Even Quantity
-plt.plot(sav1*(budget/p1)/sav2, sav1*(budget/p1), marker='o', 
-         label = f'Break Even Quantity ({round(sav1*(budget/p1)/sav2)})')
-
-plt.title('Saving Difference between Location Services\n with $100,000 Budget')
-plt.xlabel('Quantity of Lookups')
-plt.ylabel('Saving ($)')
-plt.rcParams.update({'font.size': 12})
-plt.legend();
-
-```
-
-
-```python
-# Saving per call ($)
-sav1 = acc1* sr* call_price - p1 #Vendor 1 savings per lookup 
-sav2= acc2* sr* call_price - p2 #Vendor 2 savings per lookup
-
-budget = 100000
-end_quantity = int(budget/p2)
-quantity = [int(i) for i in range(0,end_quantity)]
-savings1 = [sav1*i if i*p1<budget else sav1*(budget/p1) for i in range(0,end_quantity)]
-savings2 = [sav2*i if i*p2<budget else sav2*(budget/p2) for i in range(0,end_quantity)]
-
-import matplotlib.pyplot as plt
-import seaborn as sns
-sns.set_style("whitegrid")
-
-plt.figure(figsize=(13,8))
-# plotting Vendor 
-plt.plot( quantity, savings1, label= f'Vendor 1- Saving Per ${round(sav1, 2)}') 
-plt.plot(quantity, savings2, label= f'Vendor 2- Saving Per ${round(sav2, 2)}')
-
-#plotting Break Even Quantity
-plt.plot(sav1*(budget/p1)/sav2, sav1*(budget/p1), marker='o', 
-         label = f'Break Even Quantity ({round(sav1*(budget/p1)/sav2)})')
-
-plt.title('Saving Difference between Location Services\n with $100,000 Budget')
-plt.xlabel('Quantity of Lookups')
-plt.ylabel('Saving ($)')
-plt.rcParams.update({'font.size': 12})
-plt.legend();
-
-print(f"Saving Rate for Vendor 1 is ${round(sav1,2)}0.\nSaving Rate for Vendor 2 is ${round(sav2,2)}.")
-print(f"With a $100,000 Budget, lookups with Vendor 1 is {round(budget/p1)} and lookups with Vendor 1 is {round(budget/p2)}.")
-print(f'Break Even Quantity-{round(sav1*(budget/p1)/sav2)}')
-```
-
-    Saving Rate for Vendor 1 is $2.00.
-    Saving Rate for Vendor 2 is $1.72.
-    With a $100,000 Budget, lookups with Vendor 1 is 1000000 and lookups with Vendor 1 is 1250000.
-    Break Even Quantity-1162791
     
 
+**Unforntunately I was not able to answer the question correct in the interview, but I decided to work it out  anyway.**
 
-![png](BusinessCaseInterview-DataAnalyst_files/BusinessCaseInterview-DataAnalyst_2_1.png)
+First I calculated the savings generated per use of each vendor option. Then I subtracted the cost of the options per lookup to find the net savings rates. The rate for Vendor 1 is 2.00 dollars and for Vendor 2 is 1.72 dollars. The below equations display the calculations.
 
+
+$$ SavingPerLookup = AccuracyLookup * PercentSavedPerLookup *  CustomerServiceCostPerTransaction$$
+
+$$ SavingRate = SavingPerLookup - CostPerLookup$$
+
+
+Using these saving rates, I generated a graph of the savings generated per transactions. With a 100,000 dollars budget, Vendor 1 and Vendor 2 max out their savings at 1,000,000 and 1,250,000 lookups respectively). The budget is fixed so the quantities above maximum lookups for vendor option have fixed savings. Vendor 1 is 2,000,000 dollars, and Vendor 2 is 2,150,000 dollar. See the graph to see the overall relationship.
+![png](index_files/index_1_1.png)
+
+
+The maximum saving for option 2 was higher that option 1 by 150,000 dollars because the additional 250,000 lookups that could be performed for the budget. Although Vendor 1 has greater savings up to the breakeven point which can be seen in the graph. I found the breakeven quantity, 1,162,791 transactions, by dividing the Vendor 2 saving rate (1.72 dollars) by the 2,000,000 dollars savings limit of Vendor 1. See the green dot on the graph at the intersection of the Vendor Saving lines.
+
+**I did not realized that the budget was fixed , and  I was incorrectly trying to optimize the budget instead of finding the breakeven quantity. Unfortunately I didn't realize my mistake until my interviewer had to  correct me.**
+
+**I also incorrectly thought the quantity could not go pass the budgeted number of lookups. This can be seen in the graph represented by solid and dashed proportions of the plotted lines.  It is visually apparent in the graph, but the graph was not available in the interview, and I had problems visualizing the scenario. I didn't realize there was a difference between the number of lookups (solid lines) that can be done and amount transactions can be done (solid and dashed lines)..** 
